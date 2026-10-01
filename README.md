@@ -15,7 +15,29 @@ Healthcare organizations often process heterogeneous data batches with quality i
 3. *Data Routing*:
    - *PASS*: Sent to the Clean/Trusted Delta Lake zone.
    - *FAIL*: Isolated into the Quarantine zone with error flags.
-1. *Analytics Output*: Generate summary execution statistics and performance charts.
+4. *Analytics Output*: Generate summary execution statistics and performance charts.
+   Data Source
+    │
+    ▼
+Ingestion (Batch Data)
+    │
+    ▼
+Spark / Pandas Processing
+    │
+    ▼
+Data Quality Engine (4 Checks)
+    │
+    ▼
+   Quality Gate ──────────┐
+    │                     │
+  [PASS]                [FAIL]
+    │                     │
+    ▼                     ▼
+Delta Lake            Quarantine
+(Clean Zone)          (Isolated Data)
+    │
+    ▼
+Analytics & Visualizations Output
 
 ## 5. Data Quality Checks
 The pipeline implements the following checks:
